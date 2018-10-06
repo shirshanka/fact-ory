@@ -185,7 +185,7 @@ def ask_question(current_index, total, operator, param1, param2, stats):
       if (ans == "exit") or (ans == "bye") :
         exit(operator, stats)
       if (ans == "pause") or (ans == "wait"):
-        while (ans != "ready"):
+        while (ans != "start"):
           sys.stdout.write("ok... I'm waiting.. type start when you are ready.. ")
           ans = sys.stdin.readline().strip()
         t0 = time.time()
