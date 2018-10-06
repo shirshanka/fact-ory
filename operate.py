@@ -190,13 +190,16 @@ def ask_question(current_index, total, operator, param1, param2, stats):
           ans = sys.stdin.readline().strip()
         t0 = time.time()
       else:
-        number_ans = int(ans)
-        stats.add_statistic(operator, param1,param2,number_ans,time_diff)
-        if (operator.evaluate(param1, param2) != number_ans):
-          print colored("Oops...",'red')
-        else:
-          correct = True
-          print colored("Correct!",'green'), colored("%d" % int(time_diff), 'blue'), "seconds\n"
+        try: 
+          number_ans = int(ans)
+          stats.add_statistic(operator, param1,param2,number_ans,time_diff)
+          if (operator.evaluate(param1, param2) != number_ans):
+            print colored("Oops...",'red')
+          else:
+            correct = True
+            print colored("Correct!",'green'), colored("%d" % int(time_diff), 'blue'), "seconds\n"
+        except ValueError:
+          continue
 
 
 main()
