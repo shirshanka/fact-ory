@@ -10,7 +10,7 @@ from stats import Stats;
 import argparse
 
 
-user_name = "Ananya";
+user_name = "kid";
 
 
 
@@ -18,6 +18,9 @@ class Operator():
   def __init__(self):
     self.name = "noop"
     self.type = "binary"
+
+  def feasible_question(self, param1, param2):
+    return True
 
 class Multiply(Operator):
   def __init__(self):
@@ -87,7 +90,14 @@ class Divide(Operator):
   def evaluate(self, param1, param2):
     return param1 / param2
 
+  def get_question(self, param1, param2):
+    return "%d %s %d " % (param1, u'\u00f7', param2)
 
+  def feasible_question(self, param1, param2):
+    if (param1 % param2) == 0:
+      return True
+    else:
+      return False
 
 def say_bye():
   sys.stdout.write("See you next time %s!\n" % user_name);
@@ -163,9 +173,10 @@ def main():
   questions = []
   for param1 in range(param1_range[0], param1_range[1]+1):
     for param2 in range(param2_range[0], param2_range[1]+1):
-      questions.append((param1, param2))
+      if (operator.feasible_question(param1, param2)):
+        questions.append((param1, param2))
   shuffle(questions)
-  
+
   total_questions = len(questions)
   
   for index, question in enumerate(questions):
